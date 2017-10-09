@@ -1,6 +1,7 @@
 import java.awt.Color;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Player {
 	
@@ -22,11 +23,11 @@ public class Player {
 	
 	public Player(PApplet parent, int xPos, int yPos)
 	{
-		this.parent = parent;
+		this.parent = parent;				//pass in parent (PApplet) so classes see processing libraries
 		this.xPos = xPos;
 		this.yPos = yPos;
 	}
-	
+	//makes player fall
 	public void fall()	
 	{
 		if(falling)
@@ -45,7 +46,7 @@ public class Player {
 			}
 		}
 	}
-	
+	//changes color when player loses
 	public void changeColor(Color newColor)
 	{
 		this.playerColor = newColor;
@@ -78,7 +79,7 @@ public class Player {
 	{
 		this.xPos = xPos;
 	}
-	
+	//increases speed when player dies or if need to increase difficulty
 	public void increaseSpeed(double howMuch)
 	{
 		this.speed = this.speed + howMuch;
