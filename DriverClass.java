@@ -14,7 +14,6 @@ public class DriverClass extends PApplet {
 	private Button restartButton;
 	private Button startButton;
 	private boolean start = false;
-//	PImage backgroundImage;
 
 	public static void main(String[] args) {
 		
@@ -29,16 +28,15 @@ public class DriverClass extends PApplet {
 	
 	public void setup()
 	{
-		//backgroundImage = loadImage("neon_background1.jpeg");
 		frameRate(60);
 		background(backgroundColor.getRGB());
-		bars = new Bars[3];						//initialise first bars and player
+		bars = new Bars[3];						//initialise first bars
 		for(int i = 0; i < bars.length; i++)
 		{
 			initialiseBar(i, (int) (SCREEN_WIDTH + i * 0.5 * SCREEN_WIDTH));
 		}
+		//initialise game to start
 		this.player = new Player(this, (int) SCREEN_WIDTH/2,(int) SCREEN_HEIGHT/2);
-		
 		this.score = 0;
 		this.gameOver = false;
 		this.startButton = new Button(this);
@@ -56,9 +54,8 @@ public class DriverClass extends PApplet {
 		int barHeight = min + (int) (Math.random() * ((max - min) + 1));
 		int yPos2 = (int) (barHeight + gap);			
 		bars[index] = new Bars(this, xPos, yPos1, xPos, yPos2, barHeight);		//barHeight is only for top bar
-		//System.out.println("xPos = " + xPos + " yPos2 = " + yPos2 + " barHeight: " + barHeight);
 	}
-	
+	//method to draw all bars on screen
 	public void drawBars()
 	{
 		for(int i = 0; i < bars.length; i++)
@@ -77,7 +74,7 @@ public class DriverClass extends PApplet {
 	
 	public void drawScore()
 	{
-		Color[] colors = new Color[10];				//fix colours********************************
+		Color[] colors = new Color[10];				
 		colors[0] = new Color(51, 51, 255);			//blue
 		colors[1] = new Color(255, 102, 102);		//salmon
 		colors[2] = new Color(178, 102, 255);		//purple	
@@ -87,13 +84,13 @@ public class DriverClass extends PApplet {
 		colors[6] = new Color(255, 180, 0);			//sand	
 		colors[7] = new Color(255, 0, 0);			//red	
 		colors[8] = new Color(250, 200, 204);		//pale pink	
-		colors[9] = new Color(130, 255, 204);		//sand	
+		colors[9] = new Color(130, 255, 204);		//aqua
 		
 		int xPos = (int) (SCREEN_WIDTH * 0.1);
 		int yPos = (int) (SCREEN_WIDTH * 0.1);
 		int dimensions = (int) (SCREEN_WIDTH * 0.1);
 		
-		fill(colors[score % 10].getRGB());
+		fill(colors[score % 10].getRGB());					//chooses color based on score
 		this.rect(xPos, yPos, dimensions, dimensions);		//draws rectangle for score
 		fill(255);
 		textSize((float) (SCREEN_WIDTH * 0.05));
@@ -138,7 +135,7 @@ public class DriverClass extends PApplet {
 				Color newColor = new Color(255, 0, 0);
 				this.player.changeColor(newColor);
 				this.gameOver = true;
-				this.player.increaseSpeed(0.2);
+				this.player.increaseSpeed(0.2);		//speeds up fall when player loses
 			}
 		}
 	}
@@ -146,16 +143,19 @@ public class DriverClass extends PApplet {
 	
 	
 	public void mousePressed()
-	{
+	{	
+		//starts game when start button pressed
 		if(startButton.hoveringOver(mouseX, mouseY))
 		{
 			this.start = true;
 			setup();
 		}
+		//makes player jump when click on screen
 		if(!gameOver)
 		{
 			this.player.jump();	
 		}
+		//restarts game
 		if(gameOver && this.restartButton.hoveringOver(mouseX, mouseY))
 		{
 			this.start = false;
@@ -192,7 +192,7 @@ public class DriverClass extends PApplet {
 				(int) (SCREEN_HEIGHT * 0.1), "MENU", (int) (SCREEN_WIDTH * 0.05), new Color(57, 255, 20));
 		restartButton.draw(mouseX, mouseY);
 	}
-	
+	//method to display start game menu
 	public void startGameMenu()
 	{
 		startButton = new Button(this, (int) ((SCREEN_WIDTH/2) - ((SCREEN_WIDTH * 0.6)/2)), (int) ((SCREEN_HEIGHT/2) - (SCREEN_HEIGHT * 0.1)), 
