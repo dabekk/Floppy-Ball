@@ -26,7 +26,7 @@ public class Button {
 	
 	public Button(PApplet parent, int xPos, int yPos, int width, int height, String text, int textSize, Color buttonColor)
 	{
-		this.parent = parent;
+		this.parent = parent;			//must pass in parent so classes see processing libraries
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.width = width;
@@ -91,7 +91,7 @@ public class Button {
 	public void setTextSize(int textSize) {
 		this.textSize = textSize;
 	}
-	
+	//returns true if mouse is hovering over button
 	public boolean hoveringOver(int mouseX, int mouseY)
 	{
 		if(mouseX >= this.xPos && mouseX <= this.xPos + this.width && 
@@ -104,7 +104,7 @@ public class Button {
 			return false;
 		}
 	} 
-	
+	//draws button
 	public void draw(int mouseX, int mouseY)
 	{
 		if(hoveringOver(mouseX, mouseY))
@@ -115,7 +115,7 @@ public class Button {
 		{
 			parent.stroke(0);
 		}
-		
+		//aligns text to centre of button
 		parent.fill(this.buttonColor.getRGB());
 		parent.rect(this.xPos, this.yPos, this.width, this.height);
 		parent.textSize(textSize);	
