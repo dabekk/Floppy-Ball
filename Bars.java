@@ -16,7 +16,7 @@ public class Bars extends PApplet{
 	private int yPos1;
 	private int xPos2;
 	private int yPos2;
-	private final Color barColor =  new Color(0, 100, 255);		//brown bar color(trees)
+	private final Color barColor =  new Color(0, 100, 255);		//blue bars
 	private boolean passedCentre = false;
 	private double speed = 3;
 	
@@ -33,7 +33,7 @@ public class Bars extends PApplet{
 	
 	public Bars(PApplet parent, int xPos1, int yPos1, int xPos2, int yPos2, int barHeight)
 	{
-		this.parent = parent;
+		this.parent = parent;					//must pass in parent so classes see processing libraries
 		this.barHeight = barHeight;	
 		this.barWidth = (int) (0.2 * 500);		//change to constant seen among all classes later*** //bar takes up 20% of screen
 		this.xPos1 = xPos1;
@@ -66,18 +66,18 @@ public class Bars extends PApplet{
 	{
 		return this.yPos2;
 	}
-	
+	//moves bars
 	public void move()
 	{
 		xPos1 -= this.speed;
 		xPos2 -= this.speed;
 	}
-	
+	//increases speed of bars
 	public void increaseSpeed(double howMuch)
 	{
 		this.speed = this.speed + howMuch;
 	}
-	
+	//method used to count score in game - when bar passes centre then increase score
 	public boolean getPassedCentre()
 	{
 		return passedCentre;
